@@ -1,0 +1,48 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>Project — Portfolio</title>
+
+    <link rel="stylesheet" href="styles.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/default.min.css" />
+</head>
+
+<body>
+    <header class="site-header">
+        <div class="container header-inner">
+            <div class="brand">
+                <a href="index.html" class="back">← Back</a>
+                <h1 id="project-title">Project</h1>
+                <p id="project-sub" class="tagline"></p>
+            </div>
+            <div class="header-actions">
+                <a class="btn" href="resume.pdf" target="_blank" rel="noopener">View Resume</a>
+                <a class="btn ghost" id="repo-link" href="#" target="_blank" rel="noopener">View Code</a>
+                <button id="theme-toggle-2" class="icon-btn" aria-label="Toggle theme">🌓</button>
+            </div>
+        </div>
+    </header>
+
+    <main class="container project-container">
+        <aside class="toc" id="toc">
+            <h4>Contents</h4>
+            <nav id="toc-list"></nav>
+        </aside>
+
+        <article class="doc" id="doc">
+            <div id="doc-meta" class="doc-meta"></div>
+            <div id="markdown-content" class="markdown-content">Loading…</div>
+        </article>
+    </main>
+
+    <script src="scripts/projects.js"></script>
+    <script src="scripts/project.js"></script>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/marked/5.1.0/marked.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
+</body>
+
+</html>

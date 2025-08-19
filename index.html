@@ -1,0 +1,79 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>Ahmad Rashid — Systems & Systems-Programming Portfolio</title>
+
+    <link rel="stylesheet" href="styles.css" />
+    <!-- highlight.js styles (default) -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/default.min.css" />
+</head>
+
+<body>
+    <header class="site-header">
+        <div class="container header-inner">
+            <div class="brand">
+                <h1>Ahmad Rashid</h1>
+                <p class="tagline">CS student focused on systems & systems-programming — I build fast, reliable tools in
+                    C & Go.</p>
+            </div>
+            <div class="header-actions">
+                <a class="btn" href="resume.pdf" target="_blank" rel="noopener">View Resume</a>
+                <a class="btn ghost" href="mailto:ahmad.rashid@mail.utoronto.ca">Email</a>
+                <a class="btn ghost" href="https://github.com/ahmadhrashid" target="_blank" rel="noopener">GitHub</a>
+                <button id="theme-toggle" class="icon-btn" aria-label="Toggle theme">🌓</button>
+            </div>
+        </div>
+    </header>
+
+    <main class="container">
+        <section id="hero" class="hero">
+            <div>
+                <h2>Hi — I build low-level systems that just work.</h2>
+                <p class="lead">I enjoy systems programming, concurrency and building tools that make other engineers'
+                    lives easier.</p>
+            </div>
+            <div class="skills">
+                <span class="badge">C</span>
+                <span class="badge">Go</span>
+                <span class="badge">RISC-V</span>
+                <span class="badge">Linux</span>
+                <span class="badge">Git</span>
+                <span class="badge">Testing</span>
+            </div>
+        </section>
+
+        <section id="projects">
+            <h3>Projects</h3>
+            <div id="project-grid" class="grid"></div>
+        </section>
+
+        <section id="extra" class="extra">
+            <h3>About & Contact</h3>
+            <p>
+                I'm a University of Toronto CS student who enjoys systems programming, networking and building
+                production-grade tools.
+                <br />
+                <a href="resume.pdf" target="_blank" rel="noopener">View resume</a> • <a
+                    href="mailto:ahmad.rashid@mail.utoronto.ca">Email me</a>
+            </p>
+        </section>
+
+        <footer class="site-footer">
+            <p>.</p>
+        </footer>
+    </main>
+
+    <!-- Projects metadata -->
+    <script src="scripts/projects.js"></script>
+    <!-- main page logic -->
+    <script src="scripts/main.js"></script>
+
+    <!-- third-party libs -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/marked/5.1.0/marked.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
+</body>
+
+</html>
