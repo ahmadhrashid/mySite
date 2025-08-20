@@ -1,16 +1,16 @@
 // scripts/main.js
 document.addEventListener("DOMContentLoaded", () => {
-    populateProjects();
-    setupThemeToggle();
+  populateProjects();
+  setupThemeToggle();
 });
 
 function populateProjects() {
-    const grid = document.getElementById("project-grid");
-    grid.innerHTML = "";
-    window.PROJECTS.forEach(p => {
-        const card = document.createElement("div");
-        card.className = "card";
-        card.innerHTML = `
+  const grid = document.getElementById("project-grid");
+  grid.innerHTML = "";
+  window.PROJECTS.forEach(p => {
+    const card = document.createElement("div");
+    card.className = "card";
+    card.innerHTML = `
       <div class="thumb" style="background-image:url('${p.thumb}')" aria-hidden="true"></div>
       <h4>${p.title}</h4>
       <div class="small">${p.short}</div>
@@ -23,20 +23,27 @@ function populateProjects() {
         <a class="btn ghost" href="${p.repo}" target="_blank" rel="noopener">Code</a>
       </div>
     `;
-        grid.appendChild(card);
-    });
+    grid.appendChild(card);
+  });
 }
 
 function setupThemeToggle() {
-    const btn = document.getElementById("theme-toggle");
-    const applied = localStorage.getItem("theme");
-    if (applied) document.documentElement.setAttribute("data-theme", applied);
+  const btn = document.getElementById("theme-toggle");
+  const applied = localStorage.getItem("theme");
+  if (applied) {
+    document.documentElement.setAttribute("data-theme", applied);
+    btn.innerText = applied === "dark" ? "Light" : "Dark";
+  } else {
+    // default label is "Dark" meaning clicking will switch to dark
+    btn.innerText = "Dark";
+  }
 
-    btn.addEventListener("click", () => {
-        const cur = document.documentElement.getAttribute("data-theme");
-        const next = cur === "dark" ? "" : "dark";
-        if (next) document.documentElement.setAttribute("data-theme", next);
-        else document.documentElement.removeAttribute("data-theme");
-        localStorage.setItem("theme", next);
-    });
+  btn.addEventListener("click", () => {
+    const cur = document.documentElement.getAttribute("data-theme");
+    const next = cur === "dark" ? "" : "dark";
+    if (next) document.documentElement.setAttribute("data-theme", next);
+    else document.documentElement.removeAttribute("data-theme");
+    localStorage.setItem("theme", next);
+    btn.innerText = next === "dark" ? "Light" : "Dark";
+  });
 }

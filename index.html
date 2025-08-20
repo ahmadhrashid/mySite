@@ -7,7 +7,6 @@
     <title>Ahmad Rashid — Systems & Systems-Programming Portfolio</title>
 
     <link rel="stylesheet" href="styles.css" />
-    <!-- highlight.js styles (default) -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/default.min.css" />
 </head>
 
@@ -15,15 +14,40 @@
     <header class="site-header">
         <div class="container header-inner">
             <div class="brand">
-                <h1>Ahmad Rashid</h1>
+                <h1 class="name">Ahmad Rashid</h1>
                 <p class="tagline">CS student focused on systems & systems-programming — I build fast, reliable tools in
                     C & Go.</p>
             </div>
+
             <div class="header-actions">
-                <a class="btn" href="resume.pdf" target="_blank" rel="noopener">View Resume</a>
-                <a class="btn ghost" href="mailto:ahmad.rashid@mail.utoronto.ca">Email</a>
-                <a class="btn ghost" href="https://github.com/ahmadhrashid" target="_blank" rel="noopener">GitHub</a>
-                <button id="theme-toggle" class="icon-btn" aria-label="Toggle theme">🌓</button>
+                <a class="icon-link" href="https://github.com/your-github" target="_blank" rel="noopener"
+                    aria-label="GitHub">
+                    <!-- GitHub SVG -->
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+                        <path
+                            d="M12 .5C5.65.5.5 5.65.5 12c0 5.09 3.29 9.4 7.86 10.94.58.11.79-.25.79-.56 0-.28-.01-1.02-.02-2-3.2.7-3.88-1.54-3.88-1.54-.53-1.35-1.3-1.71-1.3-1.71-1.06-.72.08-.71.08-.71 1.18.08 1.8 1.21 1.8 1.21 1.04 1.78 2.72 1.27 3.38.97.1-.75.41-1.27.74-1.56-2.56-.29-5.26-1.28-5.26-5.7 0-1.26.45-2.29 1.19-3.1-.12-.29-.52-1.46.11-3.05 0 0 .97-.31 3.18 1.18a11 11 0 0 1 2.9-.39c.99.01 1.99.13 2.92.39 2.2-1.5 3.17-1.18 3.17-1.18.64 1.59.24 2.76.12 3.05.74.81 1.18 1.84 1.18 3.1 0 4.43-2.71 5.41-5.29 5.69.42.36.8 1.08.8 2.18 0 1.58-.01 2.85-.01 3.24 0 .31.21.68.8.56C20.71 21.4 24 17.09 24 12 24 5.65 18.35.5 12 .5z">
+                        </path>
+                    </svg>
+                </a>
+
+                <a class="icon-link" href="mailto:your.email@example.com" aria-label="Email">
+                    <!-- Email SVG -->
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+                        <path
+                            d="M20 4H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z" />
+                    </svg>
+                </a>
+
+                <a class="icon-link" href="https://www.linkedin.com/in/your-linkedin" target="_blank" rel="noopener"
+                    aria-label="LinkedIn">
+                    <!-- LinkedIn SVG -->
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+                        <path
+                            d="M19 0h-14c-2.76 0-5 2.24-5 5v14c0 2.76 2.24 5 5 5h14c2.76 0 5-2.24 5-5v-14c0-2.76-2.24-5-5-5zm-11.5 19h-3v-9h3v9zm-1.5-10.3c-.97 0-1.75-.79-1.75-1.75s.78-1.75 1.75-1.75 1.75.79 1.75 1.75-.78 1.75-1.75 1.75zm13 10.3h-3v-4.8c0-1.15-.02-2.62-1.6-2.62-1.6 0-1.84 1.24-1.84 2.53v4.89h-3v-9h2.88v1.23h.04c.4-.76 1.37-1.56 2.82-1.56 3.02 0 3.58 1.99 3.58 4.57v4.76z" />
+                    </svg>
+                </a>
+
+                <button id="theme-toggle" class="theme-btn" aria-label="Toggle theme">Dark</button>
             </div>
         </div>
     </header>
@@ -46,7 +70,7 @@
         </section>
 
         <section id="projects">
-            <h3>Projects</h3>
+            <h3>Selected Projects</h3>
             <div id="project-grid" class="grid"></div>
         </section>
 
@@ -57,21 +81,18 @@
                 production-grade tools.
                 <br />
                 <a href="resume.pdf" target="_blank" rel="noopener">View resume</a> • <a
-                    href="mailto:ahmad.rashid@mail.utoronto.ca">Email me</a>
+                    href="mailto:your.email@example.com">Email me</a>
             </p>
         </section>
 
         <footer class="site-footer">
-            <p>.</p>
+            <p>Built as a static site — easy to host on GitHub Pages / Netlify.</p>
         </footer>
     </main>
 
-    <!-- Projects metadata -->
     <script src="scripts/projects.js"></script>
-    <!-- main page logic -->
     <script src="scripts/main.js"></script>
 
-    <!-- third-party libs -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/marked/5.1.0/marked.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
 </body>

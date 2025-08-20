@@ -52,6 +52,11 @@ function renderMarkdown(md) {
     const container = document.getElementById("markdown-content");
     container.innerHTML = html;
 
+    // Make sure doc won't force page width to expand
+    // (ensures children can shrink)
+    const doc = document.getElementById("doc");
+    doc.style.minWidth = "0";
+
     // Add copy buttons for code blocks
     addCopyButtons(container);
 
@@ -77,7 +82,6 @@ function addCopyButtons(container) {
                 setTimeout(() => (btn.innerText = "Copy"), 1200);
             });
         });
-        // Put the button at top-right inside the pre
         pre.style.position = "relative";
         btn.style.position = "absolute";
         btn.style.top = "8px";
@@ -85,7 +89,7 @@ function addCopyButtons(container) {
         pre.appendChild(btn);
     });
 
-    // Activate highlight.js on all code blocks (in case)
+    // Activate highlight.js on all code blocks
     document.querySelectorAll('pre code').forEach(el => {
         try { hljs.highlightElement(el); } catch (e) { }
     });
@@ -101,7 +105,6 @@ function buildTOC(container) {
     }
     headings.forEach(h => {
         if (!h.id) {
-            // ensure stable id
             h.id = h.textContent.trim().toLowerCase().replace(/\s+/g, "-").replace(/[^\w\-]/g, "");
         }
         const a = document.createElement("a");
@@ -115,7 +118,12 @@ function buildTOC(container) {
 function setupThemeToggle() {
     const btn = document.getElementById("theme-toggle-2");
     const applied = localStorage.getItem("theme");
-    if (applied) document.documentElement.setAttribute("data-theme", applied);
+    if (applied) {
+        document.documentElement.setAttribute("data-theme", applied);
+        btn.innerText = applied === "dark" ? "Light" : "Dark";
+    } else {
+        btn.innerText = "Dark";
+    }
 
     btn.addEventListener("click", () => {
         const cur = document.documentElement.getAttribute("data-theme");
@@ -123,5 +131,6 @@ function setupThemeToggle() {
         if (next) document.documentElement.setAttribute("data-theme", next);
         else document.documentElement.removeAttribute("data-theme");
         localStorage.setItem("theme", next);
+        btn.innerText = next === "dark" ? "Light" : "Dark";
     });
 }

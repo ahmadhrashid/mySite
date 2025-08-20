@@ -68,6 +68,63 @@ body {
     font-size: .95rem
 }
 
+/* bigger, more noticeable name */
+.name {
+    font-size: 1.8rem;
+    font-weight: 700;
+    letter-spacing: 0.3px;
+    margin: 0;
+    line-height: 1;
+}
+
+.brand .tagline {
+    margin-top: 6px
+}
+
+/* icon link styles */
+.header-actions {
+    display: flex;
+    align-items: center;
+    gap: 10px
+}
+
+.icon-link {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 38px;
+    height: 38px;
+    border-radius: 8px;
+    text-decoration: none;
+    color: var(--text);
+    background: transparent;
+    border: 1px solid transparent;
+}
+
+.icon-link:hover {
+    background: var(--glass)
+}
+
+.icon-link svg {
+    display: block;
+}
+
+/* theme button (text) */
+.theme-btn {
+    background: transparent;
+    border: 1px solid rgba(0, 0, 0, 0.06);
+    padding: 8px 12px;
+    border-radius: 10px;
+    cursor: pointer;
+    font-weight: 600;
+    color: var(--text);
+}
+
+.theme-btn:hover {
+    filter: brightness(0.98)
+}
+
+/* other styles (unchanged) */
 .btn {
     background: var(--accent);
     color: white;
@@ -186,9 +243,10 @@ body {
 
 .project-container {
     display: grid;
-    grid-template-columns: 260px 1fr;
+    /* allow doc area to shrink when necessary to keep TOC visible */
+    grid-template-columns: 260px minmax(0, 1fr);
     gap: 18px;
-    margin-top: 20px
+    margin-top: 20px;
 }
 
 .toc {
@@ -222,7 +280,13 @@ body {
     background: var(--card);
     padding: 18px;
     border-radius: 12px;
-    min-height: 60vh
+    min-height: 60vh;
+    min-width: 0
+}
+
+.markdown-content {
+    max-width: 100%;
+    overflow-wrap: anywhere
 }
 
 .markdown-content pre {
@@ -230,7 +294,8 @@ body {
     padding: 12px;
     border-radius: 8px;
     overflow: auto;
-    color: #f6f8fa
+    color: #f6f8fa;
+    max-width: 100%
 }
 
 .markdown-content h1,
@@ -243,19 +308,16 @@ body {
     font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, "Roboto Mono", monospace
 }
 
-.doc-meta {
-    display: flex;
-    gap: 8px;
-    align-items: center;
-    margin-bottom: 12px;
-    flex-wrap: wrap
+/* ensure long inline code & words wrap */
+.markdown-content code {
+    word-break: break-word
 }
 
-.doc-meta .badge {
-    font-size: .8rem;
-    padding: 6px 8px
+.markdown-content pre code {
+    white-space: pre;
 }
 
+/* copy btn inside pre */
 .copy-btn {
     font-size: .8rem;
     border: 1px solid rgba(255, 255, 255, 0.06);
@@ -287,5 +349,14 @@ body {
         flex-direction: column;
         align-items: flex-start;
         gap: 10px
+    }
+
+    .name {
+        font-size: 1.4rem
+    }
+
+    .icon-link {
+        width: 36px;
+        height: 36px
     }
 }
