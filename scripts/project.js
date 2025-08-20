@@ -1,4 +1,10 @@
-// scripts/project.js
+// --- DEFAULT THEME: dark ---
+// If the user hasn't chosen a theme yet, default to dark.
+if (!localStorage.getItem("theme")) {
+    localStorage.setItem("theme", "dark");
+    document.documentElement.setAttribute("data-theme", "dark");
+}
+
 document.addEventListener("DOMContentLoaded", () => {
     setupThemeToggle();
     const id = new URLSearchParams(location.search).get("id");

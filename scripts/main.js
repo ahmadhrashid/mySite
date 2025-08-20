@@ -1,4 +1,10 @@
-// scripts/main.js
+// --- DEFAULT THEME: dark ---
+// If the user hasn't chosen a theme yet, default to dark.
+if (!localStorage.getItem("theme")) {
+  localStorage.setItem("theme", "dark");
+  document.documentElement.setAttribute("data-theme", "dark");
+}
+
 document.addEventListener("DOMContentLoaded", () => {
   populateProjects();
   setupThemeToggle();
@@ -7,25 +13,36 @@ document.addEventListener("DOMContentLoaded", () => {
 function populateProjects() {
   const grid = document.getElementById("project-grid");
   grid.innerHTML = "";
-  window.PROJECTS.forEach(p => {
+  (window.PROJECTS || []).forEach(p => {
     const card = document.createElement("div");
     card.className = "card";
+
+    // card inner HTML minimal layout
     card.innerHTML = `
-      <div class="thumb" style="background-image:url('${p.thumb}')" aria-hidden="true"></div>
-      <h4>${p.title}</h4>
-      <div class="small">${p.short}</div>
-      <div class="meta">
-        ${p.tech.map(t => `<span class="tech">${t}</span>`).join(" ")}
+      <div class="card-body">
+        <h4 class="project-title"><a href="project.html?id=${encodeURIComponent(p.id)}">${p.title}</a></h4>
+        <div class="small project-desc">${p.short}</div>
+
+        <div class="meta project-badges" style="margin-top:10px;">
+          ${p.tech.map(t => `<span class="tech">${t}</span>`).join(" ")}
+        </div>
+
+        <div class="actions" style="margin-top:12px;">
+          <a class="btn" href="project.html?id=${encodeURIComponent(p.id)}">Docs</a>
+          <a class="btn ghost" href="${p.repo}" target="_blank" rel="noopener">Code</a>
+        </div>
       </div>
-      <div class="small">${p.impact}</div>
-      <div class="actions">
-        <a class="btn" href="project.html?id=${encodeURIComponent(p.id)}">Docs</a>
-        <a class="btn ghost" href="${p.repo}" target="_blank" rel="noopener">Code</a>
+
+      <div class="card-footer">
+        <div></div>
+        <div class="project-date small">${p.date || ""}</div>
       </div>
     `;
+
     grid.appendChild(card);
   });
 }
+
 
 function setupThemeToggle() {
   const btn = document.getElementById("theme-toggle");
