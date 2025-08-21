@@ -17,6 +17,8 @@ document.addEventListener("DOMContentLoaded", () => {
         document.getElementById("markdown-content").innerText = `Project "${id}" not found.`;
         return;
     }
+    document.title = `Ahmad Rashid | ${project.title}`;
+
 
     // fill header meta
     document.getElementById("project-title").innerText = project.title;

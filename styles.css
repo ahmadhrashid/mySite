@@ -478,3 +478,65 @@ body {
     min-width: 0;
     word-break: break-word;
 }
+
+/* -------- spacing tweaks ---------- */
+
+/* 1) more space between main content and footer site-wide */
+.site-footer {
+    margin: 100px 0 120px;
+}
+
+/* 2) give the header brand (back link + title) more horizontal breathing room */
+body.project .brand {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    /* space between back link and name */
+}
+
+.brand .back {
+    margin-right: 6px;
+    /* extra nudge (optional) */
+    color: var(--muted);
+    text-decoration: none;
+    font-weight: 600;
+}
+
+/* --- NEW: more vertical breathing room in header --- */
+/* apply only on project pages */
+body.project :root {
+    --header-height: 96px;
+}
+
+body.project .site-header .header-inner {
+    padding-top: 22px;
+    padding-bottom: 22px;
+    padding-left: 24px;
+    padding-right: 24px;
+}
+
+/* 3) small-screen adjustments */
+@media (max-width: 900px) {
+    .site-footer {
+        margin: 60px 0 80px;
+    }
+
+    .brand {
+        gap: 10px;
+    }
+
+    .brand .back {
+        margin-right: 4px;
+    }
+
+    body.project :root {
+        --header-height: 76px;
+    }
+
+    body.project .site-header .header-inner {
+        padding-top: 14px;
+        padding-bottom: 14px;
+        padding-left: 20px;
+        padding-right: 20px;
+    }
+}

@@ -2,7 +2,7 @@ window.PROJECTS = [
     {
         id: "go-redis",
         title: "Redis Clone in Go",
-        short: "A Redis-like server in Go; implemented BLPOP, PUBLISH and basic replication.",
+        short: "Built a high-performance Redis clone in Go with replication, concurrency, and core key-value operations.",
         tech: ["Go", "Networking", "RESP"],
         impact: "Implemented BLPOP and PUBLISH; passed the provided unit tests for Stage NA2 and integrated replication ACKs.",
         repo: "https://github.com/ahmadhrashid/go-redis",
