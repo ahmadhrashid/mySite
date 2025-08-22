@@ -1,9 +1,19 @@
-// --- DEFAULT THEME: dark ---
+// Ensure theme is canonical and applied on load
 // If the user hasn't chosen a theme yet, default to dark.
-if (!localStorage.getItem("theme")) {
+if (localStorage.getItem("theme") === null) {
   localStorage.setItem("theme", "dark");
-  document.documentElement.setAttribute("data-theme", "dark");
 }
+
+// Apply whatever is stored (either "dark" or "light")
+(function applyStoredTheme() {
+  const t = localStorage.getItem("theme");
+  if (t === "dark") {
+    document.documentElement.setAttribute("data-theme", "dark");
+  } else {
+    // light = remove the attribute so CSS falls back to light vars
+    document.documentElement.removeAttribute("data-theme");
+  }
+})();
 
 document.addEventListener("DOMContentLoaded", () => {
   populateProjects();
@@ -45,22 +55,30 @@ function populateProjects() {
 
 
 function setupThemeToggle() {
-  const btn = document.getElementById("theme-toggle");
+  // support both id names used across pages
+  const btn = document.getElementById("theme-toggle") || document.getElementById("theme-toggle-2");
+  if (!btn) return;
+
+  // Read applied theme and set button label
   const applied = localStorage.getItem("theme");
-  if (applied) {
-    document.documentElement.setAttribute("data-theme", applied);
-    btn.innerText = applied === "dark" ? "Light" : "Dark";
-  } else {
-    // default label is "Dark" meaning clicking will switch to dark
-    btn.innerText = "Dark";
-  }
+  btn.innerText = applied === "dark" ? "Light" : "Dark";
 
   btn.addEventListener("click", () => {
-    const cur = document.documentElement.getAttribute("data-theme");
-    const next = cur === "dark" ? "" : "dark";
-    if (next) document.documentElement.setAttribute("data-theme", next);
-    else document.documentElement.removeAttribute("data-theme");
+    // Determine current theme from DOM (if data-theme="dark" present it's dark)
+    const currentlyDark = document.documentElement.getAttribute("data-theme") === "dark";
+    const next = currentlyDark ? "light" : "dark";
+
+    // Apply next theme
+    if (next === "dark") {
+      document.documentElement.setAttribute("data-theme", "dark");
+    } else {
+      document.documentElement.removeAttribute("data-theme");
+    }
+
+    // Persist canonical string
     localStorage.setItem("theme", next);
+
+    // Update button label to indicate the action (click to switch to other)
     btn.innerText = next === "dark" ? "Light" : "Dark";
   });
 }
