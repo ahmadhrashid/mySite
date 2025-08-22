@@ -606,3 +606,31 @@ body.project .site-header .header-inner {
 [data-theme="dark"] .markdown-content a:focus {
     box-shadow: 0 0 0 3px rgba(58, 160, 255, 0.10);
 }
+
+/* General code block styling */
+pre[class*="language-"],
+code[class*="language-"] {
+    background: #1e1e1e !important;
+    /* dark background */
+    color: #d4d4d4 !important;
+    /* light text */
+}
+
+/* Comments */
+.token.comment {
+    color: #6a9955 !important;
+    /* greenish */
+}
+
+/* Strings */
+.token.string {
+    color: #ce9178 !important;
+    /* reddish */
+}
+
+/* Keywords / commands */
+.token.keyword,
+.token.builtin {
+    color: #569cd6 !important;
+    /* bluish */
+}
