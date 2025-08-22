@@ -540,3 +540,69 @@ body.project .site-header .header-inner {
         padding-right: 20px;
     }
 }
+
+/* Markdown & TOC link colors (applies to both sidebar TOC and any TOC/links inside rendered markdown) */
+
+/* Sidebar TOC (existing) */
+.toc a {
+    color: var(--muted);
+    /* default neutral color */
+    text-decoration: none;
+    padding: 6px 6px;
+    display: block;
+    border-radius: 6px;
+    transition: background 150ms ease, color 150ms ease;
+}
+
+/* Links inside the rendered markdown (including markdown-generated TOC) */
+.markdown-content a {
+    color: var(--accent);
+    /* change this to whatever highlight color you want */
+    text-decoration: underline;
+    /* optional: underline for clarity */
+    transition: color 150ms ease, background 150ms ease;
+}
+
+/* Hover for both */
+.toc a:hover,
+.markdown-content a:hover {
+    background: rgba(0, 0, 0, 0.04);
+    /* subtle hover; theme-aware overrides below */
+    color: var(--text);
+}
+
+/* Visited links shouldn't keep the browser default color */
+.toc a:visited,
+.markdown-content a:visited {
+    color: var(--muted);
+}
+
+/* Focus for keyboard accessibility */
+.toc a:focus,
+.markdown-content a:focus {
+    outline: none;
+    box-shadow: 0 0 0 3px rgba(11, 116, 209, 0.10);
+    background: rgba(11, 116, 209, 0.06);
+}
+
+/* Active/selected TOC item (sidebar) */
+.toc a.active {
+    background: var(--accent);
+    color: #fff;
+}
+
+/* Theme-aware tweaks for dark mode */
+[data-theme="dark"] .toc a:hover,
+[data-theme="dark"] .markdown-content a:hover {
+    background: rgba(255, 255, 255, 0.03);
+}
+
+[data-theme="dark"] .markdown-content a {
+    color: var(--accent);
+    /* keeps accent appropriate in dark theme */
+}
+
+[data-theme="dark"] .toc a:focus,
+[data-theme="dark"] .markdown-content a:focus {
+    box-shadow: 0 0 0 3px rgba(58, 160, 255, 0.10);
+}
