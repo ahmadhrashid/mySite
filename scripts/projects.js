@@ -21,7 +21,7 @@ window.PROJECTS = [
     },
     {
         id: "mysh",
-        title: "mysh — POSIX-style Unix shell",
+        title: "mysh - Unix Shell in C",
         short: "A POSIX-style shell in C supporting pipelines, job control and an integrated TCP chat server.",
         tech: ["C", "CLI", "POSIX"],
         impact: "Built a shell with job control, environment expansion, pipelines and an integrated TCP chat server — used for systems programming practice.",
