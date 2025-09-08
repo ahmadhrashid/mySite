@@ -65,39 +65,6 @@ Then run:
 
 ---
 
-## Project Structure
-
-```plaintext
-webserver/
-├── src/                # C source files and headers
-│   ├── config.c, config.h
-│   ├── globals.c, globals.h
-│   ├── logger.c, logger.h
-│   ├── queue.c, queue.h
-│   ├── server.c, server.h
-│   ├── threadpool.c, threadpool.h
-│   └── ... (future modules)
-├── www/                # Default document root (static files)
-│   └── index.html
-├── build/              # Compiled object files
-├── Makefile            # Build instructions
-├── .gitignore          # Ignored files (e.g., build/, logs)
-├── webserver.conf      # Sample config file
-└── README.md           # Project overview and usage
-```
-
----
-
-## .gitignore
-
-```text
-build/
-access.log
-error.log
-```
-
----
-
 ## Future Work
 
 * Directory listing with secure path sanitization
