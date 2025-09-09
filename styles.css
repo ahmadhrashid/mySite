@@ -634,3 +634,34 @@ code[class*="language-"] {
     color: #569cd6 !important;
     /* bluish */
 }
+
+
+a {
+    color: var(--accent);
+    text-decoration: underline;
+    transition: color 150ms ease, background 150ms ease;
+}
+
+a:hover {
+    color: var(--text);
+    background: rgba(0, 0, 0, 0.04);
+}
+
+a:visited {
+    color: var(--muted);
+}
+
+a:focus {
+    outline: none;
+    box-shadow: 0 0 0 3px rgba(11, 116, 209, 0.10);
+    background: rgba(11, 116, 209, 0.06);
+}
+
+/* Dark theme overrides */
+[data-theme="dark"] a:hover {
+    background: rgba(255, 255, 255, 0.03);
+}
+
+[data-theme="dark"] a:focus {
+    box-shadow: 0 0 0 3px rgba(58, 160, 255, 0.10);
+}
