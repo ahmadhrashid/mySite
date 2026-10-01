@@ -1,62 +1,58 @@
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600&family=JetBrains+Mono:wght@400;700&display=swap');
 
+/* =========================================
+   1. VARIABLES & THEMES
+   ========================================= */
 :root {
-    /* light theme */
-    --bg: #f7f8fb;
-    /* page background (light) */
+    --bg: #f8fafc;
     --card: #ffffff;
-    /* card / header bg */
-    --text: #0f1724;
-    /* main text */
-    --muted: #55616a;
-    /* muted text */
-    --accent: #0b74d1;
-    /* primary accent */
+    --text: #0f172a;
+    --muted: #64748b;
+    --accent: #2563eb;
     --glass: rgba(255, 255, 255, 0.6);
     --radius: 12px;
-
-    /* code block background for light theme (dark-ish) */
     --code-bg: #0b1220;
     --ghost-border: rgba(0, 0, 0, 0.06);
     --icon-hover: rgba(0, 0, 0, 0.04);
+    --header-height: 84px;
 }
 
 [data-theme="dark"] {
-    /* dark theme (solid navy). change to a dark grey if you prefer (e.g. #0f1724) */
-    --bg: #000814;
-    /* solid navy background */
-    --card: #000d1a;
-    /* card slightly lighter than bg */
-    --text: #e6eef6;
-    --muted: #9fb2c8;
-    --accent: #3aa0ff;
+    --bg: #0d1117; 
+    --card: #161b22; 
+    --text: #c9d1d9;
+    --muted: #8b949e;
+    --accent: #79c0ff;
     --glass: rgba(255, 255, 255, 0.03);
-
-    /* code block background in dark mode */
     --code-bg: #06101a;
-    --ghost-border: rgba(255, 255, 255, 0.06);
+    --ghost-border: rgba(255, 255, 255, 0.1);
     --icon-hover: rgba(255, 255, 255, 0.02);
 }
 
-/* base */
+/* =========================================
+   2. BASE & TYPOGRAPHY
+   ========================================= */
 * {
     box-sizing: border-box;
 }
 
-html,
-body {
+html, body {
     height: 100%;
 }
 
 body {
     margin: 0;
-    font-family: Inter, ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
-    /* solid background color (no gradient) */
+    font-family: 'Inter', ui-sans-serif, system-ui, sans-serif;
     background: var(--bg);
     color: var(--text);
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
     line-height: 1.45;
+}
+
+h1, h2, h3, h4, .name, .post-date, .post-links {
+    font-family: 'JetBrains Mono', monospace;
+    letter-spacing: -0.02em;
 }
 
 .container {
@@ -65,7 +61,9 @@ body {
     padding: 24px;
 }
 
-/* header */
+/* =========================================
+   3. HEADER & NAVIGATION
+   ========================================= */
 .site-header {
     background: var(--card);
     box-shadow: 0 6px 20px rgba(3, 10, 18, 0.06);
@@ -78,7 +76,14 @@ body {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    padding: 16px 24px;
+    padding: 16px 0; 
+}
+
+/* Brand area */
+.brand {
+    display: flex;
+    align-items: center;
+    gap: 16px;
 }
 
 .brand h1 {
@@ -87,25 +92,67 @@ body {
 }
 
 .brand .tagline {
-    margin: 4px 0 0;
+    margin: 6px 0 0;
     color: var(--muted);
     font-size: .95rem;
 }
 
-/* bigger, more noticeable name */
-.name {
-    font-size: 1.8rem;
+.brand .back {
+    margin-right: 6px;
+    color: var(--muted);
+    text-decoration: none;
+    font-weight: 600;
+}
+
+/* GitHub / Main Action Buttons */
+.btn {
+    background: var(--accent);
+    color: white;
+    padding: 8px 12px;
+    border-radius: 10px;
+    text-decoration: none;
+    display: inline-block;
+}
+
+.open-github-btn {
+    padding: 10px 14px;
     font-weight: 700;
-    letter-spacing: 0.3px;
+    border-radius: 10px;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    text-decoration: none;
+    color: white;
+    background: var(--accent);
+    border: 1px solid rgba(0, 0, 0, 0.04);
+    box-shadow: 0 4px 10px rgba(2, 14, 28, 0.06);
+    transition: transform 150ms ease, box-shadow 150ms ease;
+}
+
+.open-github-btn:hover,
+.open-github-btn:focus {
+    transform: translateY(-1px);
+    box-shadow: 0 6px 14px rgba(2, 14, 28, 0.09);
+    text-decoration: none;
+    color: white;
+}
+
+/* Make it a bit smaller on mobile phones */
+@media (max-width: 520px) {
+    .open-github-btn {
+        padding: 8px 10px;
+        font-size: 0.95rem;
+    }
+}
+
+.name {
+    font-size: 1.6rem;
+    font-weight: 700;
     margin: 0;
     line-height: 1;
 }
 
-.brand .tagline {
-    margin-top: 6px;
-}
-
-/* icon link styles */
+/* Icons & Theme Button */
 .header-actions {
     display: flex;
     align-items: center;
@@ -121,7 +168,6 @@ body {
     border-radius: 8px;
     text-decoration: none;
     color: var(--text);
-    /* ensure SVGs using currentColor follow theme */
     background: transparent;
     border: 1px solid transparent;
 }
@@ -130,101 +176,51 @@ body {
     background: var(--icon-hover);
 }
 
-/* use block-level svg scaling */
 .icon-link svg {
     display: block;
     width: 20px;
     height: 20px;
 }
 
-/* theme button (text) */
 .theme-btn {
     background: transparent;
-    border: 1px solid var(--ghost-border);
-    padding: 8px 12px;
-    border-radius: 10px;
+    border: none;
+    padding: 8px;
+    border-radius: 8px;
     cursor: pointer;
-    font-weight: 600;
     color: var(--text);
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    margin-left: 12px;
+    position: relative;
+}
+
+.theme-btn::before {
+    content: "";
+    position: absolute;
+    left: -12px;
+    top: 50%;
+    transform: translateY(-50%);
+    height: 20px;
+    width: 1px;
+    background: var(--ghost-border);
 }
 
 .theme-btn:hover {
-    filter: brightness(0.98);
+    background: var(--icon-hover);
 }
 
-/* buttons */
-.btn {
-    background: var(--accent);
-    color: white;
-    padding: 8px 12px;
-    border-radius: 10px;
-    text-decoration: none;
-    display: inline-block;
-}
-
-.btn.ghost {
-    background: transparent;
-    border: 1px solid var(--ghost-border);
-    color: var(--text);
-}
-
-/* larger, prominent GitHub button used on project header */
-.open-github-btn {
-    padding: 10px 14px;
-    font-weight: 700;
-    border-radius: 10px;
-    display: inline-flex;
-    align-items: center;
-    gap: 8px;
-    text-decoration: none;
-    color: white;
-    background: var(--accent);
-    /* primary color; follows theme variable */
-    border: 1px solid rgba(0, 0, 0, 0.04);
-    box-shadow: 0 4px 10px rgba(2, 14, 28, 0.06);
-}
-
-/* hover / focus */
-.open-github-btn:hover,
-.open-github-btn:focus {
-    transform: translateY(-1px);
-    box-shadow: 0 6px 14px rgba(2, 14, 28, 0.09);
-    text-decoration: none;
-}
-
-/* if you prefer a ghost (outline) variant that still looks big, uncomment and use:
-.open-github-btn.ghost {
-  background: transparent;
-  color: var(--text);
-  border: 1px solid var(--ghost-border);
-  box-shadow: none;
-}
-*/
-
-/* responsive tweak: slightly smaller on narrow screens */
-@media (max-width: 520px) {
-    .open-github-btn {
-        padding: 8px 10px;
-        font-size: 0.95rem;
-    }
-}
-
-
-.icon-btn {
-    background: transparent;
-    border: none;
-    font-size: 1.05rem;
-    cursor: pointer;
-    padding: 8px 10px;
-    border-radius: 8px;
-}
-
-/* hero */
+/* =========================================
+   4. HOMEPAGE HERO & POST LIST
+   ========================================= */
 .hero {
     display: flex;
     flex-direction: column;
     gap: 16px;
-    padding: 28px 0;
+    padding: 40px 0 32px 0;
+    border-bottom: 1px dashed var(--ghost-border);
+    margin-bottom: 32px;
 }
 
 .hero h2 {
@@ -236,458 +232,9 @@ body {
     color: var(--muted);
 }
 
-.skills {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 8px;
-    margin-top: 8px;
+#posts {
+    margin-left: 40px; 
 }
-
-.badge {
-    background: var(--glass);
-    padding: 6px 10px;
-    border-radius: 999px;
-    font-weight: 600;
-    color: var(--muted);
-    font-size: .85rem;
-}
-
-/* projects grid */
-.grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-    gap: 18px;
-    margin-top: 12px;
-}
-
-.card {
-    background: var(--card);
-    border-radius: 12px;
-    padding: 14px;
-    box-shadow: 0 6px 18px rgba(2, 14, 28, 0.06);
-    display: flex;
-    flex-direction: column;
-    gap: 12px;
-}
-
-.card .thumb {
-    height: 140px;
-    border-radius: 10px;
-    background: #dfe9f8;
-    background-size: cover;
-    background-position: center;
-}
-
-.card h4 {
-    margin: 0;
-}
-
-.meta {
-    display: flex;
-    gap: 8px;
-    flex-wrap: wrap;
-}
-
-.tech {
-    font-size: .82rem;
-    padding: 6px 8px;
-    border-radius: 8px;
-    background: var(--glass);
-    color: var(--muted);
-}
-
-.card .row {
-    display: flex;
-    gap: 8px;
-    align-items: center;
-}
-
-.card .actions {
-    margin-top: auto;
-    display: flex;
-    gap: 8px;
-}
-
-.small {
-    font-size: .9rem;
-    color: var(--muted);
-}
-
-
-
-/* project page layout */
-.project-container {
-    display: grid;
-    grid-template-columns: 260px minmax(0, 1fr);
-    gap: 18px;
-    margin-top: 20px;
-}
-
-.toc {
-    background: var(--card);
-    padding: 12px;
-    border-radius: 10px;
-    position: sticky;
-    top: 84px;
-    height: calc(100vh - 120px);
-    overflow: auto;
-}
-
-.toc h4 {
-    margin: 0 0 8px 0;
-}
-
-.toc a {
-    display: block;
-    padding: 6px 4px;
-    color: var(--muted);
-    text-decoration: none;
-    border-radius: 6px;
-}
-
-.toc a:hover {
-    background: var(--glass);
-    color: var(--text);
-}
-
-.doc {
-    background: var(--card);
-    padding: 18px;
-    border-radius: 12px;
-    min-height: 60vh;
-    min-width: 0;
-}
-
-/* markdown & code */
-.markdown-content {
-    max-width: 100%;
-    overflow-wrap: anywhere;
-    color: var(--text);
-}
-
-/* Use a theme-aware variable for code block bg */
-.markdown-content pre {
-    background: var(--code-bg);
-    padding: 12px;
-    border-radius: 8px;
-    overflow: auto;
-    color: var(--text);
-    max-width: 100%;
-}
-
-/* headings and code font */
-.markdown-content h1,
-.markdown-content h2,
-.markdown-content h3 {
-    margin-top: 1.2rem;
-}
-
-.markdown-content code {
-    font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, "Roboto Mono", monospace;
-    color: var(--text);
-}
-
-/* ensure long inline code & words wrap */
-.markdown-content code {
-    word-break: break-word;
-}
-
-.markdown-content pre code {
-    white-space: pre;
-}
-
-/* copy btn inside pre */
-.copy-btn {
-    font-size: .8rem;
-    border: 1px solid rgba(255, 255, 255, 0.06);
-    background: transparent;
-    padding: 6px 8px;
-    border-radius: 8px;
-    cursor: pointer;
-    margin-left: 8px;
-}
-
-.site-footer {
-    margin: 40px 0 80px;
-    color: var(--muted);
-    text-align: center;
-}
-
-/* responsive */
-@media (max-width: 900px) {
-    .project-container {
-        grid-template-columns: 1fr;
-    }
-
-    .toc {
-        position: relative;
-        height: auto;
-    }
-
-    .header-inner {
-        flex-direction: column;
-        align-items: flex-start;
-        gap: 10px;
-    }
-
-    .name {
-        font-size: 1.4rem;
-    }
-
-    .icon-link {
-        width: 36px;
-        height: 36px;
-    }
-}
-
-/* 1) header height variable for consistent offsets */
-:root {
-    --header-height: 84px;
-    /* tune this if your header size changes */
-}
-
-/* 2) When jumping to anchors, make sure headings appear below the sticky header */
-.markdown-content h1,
-.markdown-content h2,
-.markdown-content h3 {
-    /* add a margin for scrolling so headings are visible */
-    scroll-margin-top: calc(var(--header-height) + 12px);
-}
-
-/* 3) On small screens hide the TOC to prevent overlap (mobile-friendly) */
-@media (max-width: 900px) {
-    .toc {
-        display: none;
-        /* hide TOC on mobile so it doesn't block the title */
-        /* if you prefer collapsible TOC instead of hiding, see notes below */
-    }
-
-    /* ensure doc area can use full width and doesn't get pushed */
-    .project-container {
-        grid-template-columns: 1fr;
-    }
-
-    /* slightly increase top padding so the H1 doesn't sit flush under header */
-    .doc {
-        padding-top: 22px;
-        min-width: 0;
-    }
-}
-
-/* 4) defensive rule: prevent children from forcing page width (helps overflow) */
-.doc,
-.markdown-content {
-    min-width: 0;
-    word-break: break-word;
-}
-
-/* -------- spacing tweaks ---------- */
-
-/* 1) more space between main content and footer site-wide */
-.site-footer {
-    margin: 100px 0 120px;
-}
-
-/* 2) give the header brand (back link + title) more horizontal breathing room */
-body.project .brand {
-    display: flex;
-    align-items: center;
-    gap: 16px;
-    /* space between back link and name */
-}
-
-.brand .back {
-    margin-right: 6px;
-    /* extra nudge (optional) */
-    color: var(--muted);
-    text-decoration: none;
-    font-weight: 600;
-}
-
-/* --- NEW: more vertical breathing room in header --- */
-/* apply only on project pages */
-body.project :root {
-    --header-height: 96px;
-}
-
-body.project .site-header .header-inner {
-    padding-top: 22px;
-    padding-bottom: 22px;
-    padding-left: 24px;
-    padding-right: 24px;
-}
-
-/* 3) small-screen adjustments */
-@media (max-width: 900px) {
-    .site-footer {
-        margin: 60px 0 80px;
-    }
-
-    .brand {
-        gap: 10px;
-    }
-
-    .brand .back {
-        margin-right: 4px;
-    }
-
-    body.project :root {
-        --header-height: 76px;
-    }
-
-    body.project .site-header .header-inner {
-        padding-top: 14px;
-        padding-bottom: 14px;
-        padding-left: 20px;
-        padding-right: 20px;
-    }
-}
-
-/* Markdown & TOC link colors (applies to both sidebar TOC and any TOC/links inside rendered markdown) */
-
-/* Sidebar TOC (existing) */
-.toc a {
-    color: var(--muted);
-    /* default neutral color */
-    text-decoration: none;
-    padding: 6px 6px;
-    display: block;
-    border-radius: 6px;
-    transition: background 150ms ease, color 150ms ease;
-}
-
-/* Links inside the rendered markdown (including markdown-generated TOC) */
-.markdown-content a {
-    color: var(--accent);
-    /* change this to whatever highlight color you want */
-    text-decoration: underline;
-    /* optional: underline for clarity */
-    transition: color 150ms ease, background 150ms ease;
-}
-
-/* Hover for both */
-.toc a:hover,
-.markdown-content a:hover {
-    background: rgba(0, 0, 0, 0.04);
-    /* subtle hover; theme-aware overrides below */
-    color: var(--text);
-}
-
-/* Visited links shouldn't keep the browser default color */
-.toc a:visited,
-.markdown-content a:visited {
-    color: var(--muted);
-}
-
-/* Focus for keyboard accessibility */
-.toc a:focus,
-.markdown-content a:focus {
-    outline: none;
-    box-shadow: 0 0 0 3px rgba(11, 116, 209, 0.10);
-    background: rgba(11, 116, 209, 0.06);
-}
-
-/* Active/selected TOC item (sidebar) */
-.toc a.active {
-    background: var(--accent);
-    color: #fff;
-}
-
-/* Theme-aware tweaks for dark mode */
-[data-theme="dark"] .toc a:hover,
-[data-theme="dark"] .markdown-content a:hover {
-    background: rgba(255, 255, 255, 0.03);
-}
-
-[data-theme="dark"] .markdown-content a {
-    color: var(--accent);
-    /* keeps accent appropriate in dark theme */
-}
-
-[data-theme="dark"] .toc a:focus,
-[data-theme="dark"] .markdown-content a:focus {
-    box-shadow: 0 0 0 3px rgba(58, 160, 255, 0.10);
-}
-
-/* General code block styling */
-pre[class*="language-"],
-code[class*="language-"] {
-    background: #1e1e1e !important;
-    /* dark background */
-    color: #d4d4d4 !important;
-    /* light text */
-}
-
-/* Comments */
-.token.comment {
-    color: #6a9955 !important;
-    /* greenish */
-}
-
-/* Strings */
-.token.string {
-    color: #ce9178 !important;
-    /* reddish */
-}
-
-/* Keywords / commands */
-.token.keyword,
-.token.builtin {
-    color: #569cd6 !important;
-    /* bluish */
-}
-
-:root {
-    /* light theme adjustments */
-    --bg: #f8fafc;
-    --card: #ffffff;
-    --text: #0f172a;
-    --muted: #64748b;
-    --accent: #2563eb;
-}
-
-[data-theme="dark"] {
-    /* darker, IDE-like theme */
-    --bg: #0d1117; 
-    --card: #161b22;
-    --text: #c9d1d9;
-    --muted: #8b949e;
-    --accent: #58a6ff;
-}
-
-body {
-    /* Keep Inter for readability in long blog posts */
-    font-family: 'Inter', ui-sans-serif, system-ui, sans-serif;
-    background: var(--bg);
-    color: var(--text);
-}
-
-/* Apply JetBrains Mono to all headings and the brand name */
-h1, h2, h3, h4, .name, .badge, .tech {
-    font-family: 'JetBrains Mono', monospace;
-    letter-spacing: -0.02em;
-}
-
-.name {
-    font-size: 1.6rem;
-    font-weight: 700;
-}
-
-/* Update your dark theme variables */
-[data-theme="dark"] {
-    --bg: #0d1117; 
-    --card: #161b22; /* Optional: Keep if you use cards elsewhere, but we won't use it for the list */
-    --text: #c9d1d9;
-    --muted: #8b949e;
-    --accent: #79c0ff; /* Much brighter blue for readability against dark backgrounds */
-    --code-bg: #06101a;
-    --ghost-border: rgba(255, 255, 255, 0.1);
-}
-
-/* -------------------------------------
-   Remove .grid, .card, .badge, .tech classes 
-   and replace them with these list styles 
-   ------------------------------------- */
 
 .post-list {
     display: flex;
@@ -717,7 +264,6 @@ h1, h2, h3, h4, .name, .badge, .tech {
 .post-date {
     color: var(--muted);
     font-size: 0.9rem;
-    font-family: 'JetBrains Mono', monospace;
     min-width: 100px;
 }
 
@@ -747,7 +293,6 @@ h1, h2, h3, h4, .name, .badge, .tech {
 .post-links {
     margin-top: 8px;
     font-size: 0.85rem;
-    font-family: 'JetBrains Mono', monospace;
 }
 
 .post-links a {
@@ -760,97 +305,221 @@ h1, h2, h3, h4, .name, .badge, .tech {
     text-decoration: underline;
 }
 
-/* Remove horizontal padding so the brand aligns perfectly with the hero text */
-.header-inner {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    padding: 16px 0; 
+/* =========================================
+   5. PROJECT & BLOG POST LAYOUT
+   ========================================= */
+.project-container {
+    display: grid;
+    grid-template-columns: 260px minmax(0, 1fr);
+    gap: 18px;
+    margin-top: 20px;
 }
 
-/* Add a visual break under the hero section */
-.hero {
-    display: flex;
-    flex-direction: column;
-    gap: 16px;
-    padding: 40px 0 48px 0;
-    border-bottom: 1px solid var(--ghost-border);
-    margin-bottom: 16px;
-}
-
-/* Restyle the article container into a minimalist blog post */
 .post-container {
-    max-width: 720px; /* Narrower width for comfortable reading */
+    max-width: 720px;
     margin: 40px auto 0;
-    display: block; /* Overrides previous grid layout */
+    display: block; 
 }
 
-/* Remove the card background and padding from the post body */
+/* Documentation TOC */
+.toc {
+    background: var(--card);
+    padding: 12px;
+    border-radius: 10px;
+    position: sticky;
+    top: calc(var(--header-height) + 20px);
+    height: calc(100vh - 140px);
+    overflow: auto;
+}
+
+.toc h4 {
+    margin: 0 0 8px 0;
+}
+
+.toc a {
+    color: var(--muted);
+    text-decoration: none;
+    padding: 6px 6px;
+    display: block;
+    border-radius: 6px;
+    transition: background 150ms ease, color 150ms ease;
+}
+
+.toc a:hover {
+    background: rgba(0, 0, 0, 0.04);
+    color: var(--text);
+}
+
+.toc a:visited {
+    color: var(--muted);
+}
+
+.toc a.active {
+    background: var(--accent);
+    color: #fff;
+}
+
+[data-theme="dark"] .toc a:hover {
+    background: rgba(255, 255, 255, 0.03);
+}
+
+/* Reset inner doc styles for minimalist look */
 .doc {
     background: transparent;
     padding: 0;
     box-shadow: none;
     border-radius: 0;
+    min-width: 0;
+    word-break: break-word;
 }
 
 .markdown-content {
     font-size: 1.1rem;
     line-height: 1.7;
+    max-width: 100%;
+    overflow-wrap: anywhere;
+    color: var(--text);
+    min-width: 0;
+    word-break: break-word;
 }
 
-/* Remove the old project-container and toc styles if you want to clean up */
-.toc {
-    display: none;
+.markdown-content h1,
+.markdown-content h2,
+.markdown-content h3 {
+    margin-top: 1.2rem;
+    scroll-margin-top: calc(var(--header-height) + 12px);
 }
 
-/* Push the recent work section inward so the hero appears unindented */
-#posts {
-    margin-left: 40px; 
+.markdown-content a {
+    color: var(--accent);
+    text-decoration: underline;
+    transition: color 150ms ease, background 150ms ease;
 }
 
-/* Make the hero section distinct with a bit more padding */
-.hero {
-    padding-top: 40px;
-    padding-bottom: 32px;
-    border-bottom: 1px dashed var(--ghost-border);
-    margin-bottom: 32px;
+.markdown-content a:hover {
+    background: rgba(0, 0, 0, 0.04);
+    color: var(--text);
 }
 
-/* On mobile, remove the indent so the text isn't squished */
+.markdown-content a:visited {
+    color: var(--muted);
+}
+
+.markdown-content a:focus {
+    outline: none;
+    box-shadow: 0 0 0 3px rgba(11, 116, 209, 0.10);
+    background: rgba(11, 116, 209, 0.06);
+}
+
+[data-theme="dark"] .markdown-content a:hover {
+    background: rgba(255, 255, 255, 0.03);
+}
+
+[data-theme="dark"] .markdown-content a:focus {
+    box-shadow: 0 0 0 3px rgba(58, 160, 255, 0.10);
+}
+
+/* Code Blocks */
+.markdown-content pre {
+    background: var(--code-bg);
+    padding: 12px;
+    border-radius: 8px;
+    overflow: auto;
+    color: var(--text);
+    max-width: 100%;
+}
+
+.markdown-content code {
+    font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, "Roboto Mono", monospace;
+    color: var(--text);
+    word-break: break-word;
+}
+
+.markdown-content pre code {
+    white-space: pre;
+}
+
+.copy-btn {
+    font-size: .8rem;
+    border: 1px solid rgba(255, 255, 255, 0.06);
+    background: transparent;
+    padding: 6px 8px;
+    border-radius: 8px;
+    cursor: pointer;
+    margin-left: 8px;
+}
+
+/* Syntax Highlighting Overrides */
+pre[class*="language-"],
+code[class*="language-"] {
+    background: #1e1e1e !important;
+    color: #d4d4d4 !important;
+}
+
+.token.comment { color: #6a9955 !important; }
+.token.string { color: #ce9178 !important; }
+.token.keyword,
+.token.builtin { color: #569cd6 !important; }
+
+/* =========================================
+   6. FOOTER
+   ========================================= */
+.site-footer {
+    margin: 100px 0 120px;
+    color: var(--muted);
+    text-align: center;
+}
+
+/* =========================================
+   7. MEDIA QUERIES
+   ========================================= */
+@media (max-width: 900px) {
+    body.project :root {
+        --header-height: 76px;
+    }
+
+    .header-inner {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 10px;
+    }
+
+    body.project .site-header .header-inner {
+        padding: 14px 20px;
+    }
+
+    .name {
+        font-size: 1.4rem;
+    }
+
+    .brand {
+        gap: 10px;
+    }
+
+    .brand .back {
+        margin-right: 4px;
+    }
+
+    .icon-link {
+        width: 36px;
+        height: 36px;
+    }
+
+    .project-container {
+        grid-template-columns: 1fr;
+    }
+
+    .site-footer {
+        margin: 60px 0 80px;
+    }
+
+    .toc {
+        display: none;
+    }
+}
+
 @media (max-width: 768px) {
     #posts {
         margin-left: 0; 
     }
-}
-
-.theme-btn {
-    background: transparent;
-    border: none;
-    padding: 8px;
-    border-radius: 8px;
-    cursor: pointer;
-    color: var(--text);
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    
-    /* Pushes the button to the right and adds space */
-    margin-left: 12px;
-    position: relative;
-}
-
-/* Adds a subtle vertical divider line to the left of the moon */
-.theme-btn::before {
-    content: "";
-    position: absolute;
-    left: -12px;
-    top: 50%;
-    transform: translateY(-50%);
-    height: 20px;
-    width: 1px;
-    background: var(--ghost-border);
-}
-
-.theme-btn:hover {
-    background: var(--icon-hover);
 }
