@@ -1,0 +1,5 @@
+# Building mysh: A Deep Dive into POSIX Systems
+
+Building `mysh` was an incredibly rewarding dive into POSIX systems programming. I wanted to get hands-on with the gritty details of process control, signal handling, and I/O multiplexing, so I built this Unix-style shell entirely in C. It supports core features like foreground and background job control, environment variable expansion, and complex pipelines wired up using `fork()`, `execvp()`, and `dup2()`. I also implemented custom built-in commands like `cd`, `ls`, and a `wc` utility that calculates word counts without relying on high-level string functions. 
+
+The biggest learning curve was definitely managing concurrent state and signals. Setting up a proper `SIGCHLD` reaper for background jobs taught me a lot about defensive memory management and how to safely track process completions. To push myself further, I integrated a non-blocking TCP chat server directly into the shell using `select()`, allowing simultaneous handling of standard input and remote client sockets. It was a fantastic exercise in tokenization and working directly with raw POSIX APIs.

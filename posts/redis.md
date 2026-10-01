@@ -1,0 +1,5 @@
+# Gedis: Recreating Redis Primitives in Go
+
+To better understand distributed systems, I built a Redis-compatible in-memory key-value server in Go. I designed it to parse and encode the official RESP protocol so it can be queried directly with standard tools like `redis-cli`. Beyond basic key-value operations and TTL expiry, I implemented leader-follower replication from scratch. Watching the master and replica execute the `PSYNC` handshake, transfer RDB snapshots, and process `WAIT` commands for quorum acknowledgements really demystified how distributed databases sync state.
+
+Using Go made handling concurrency fun, but it also introduced some tricky synchronization challenges. I used a per-connection goroutine model and implemented blocking primitives like `BLPOP` and `XREAD` streams using explicit request objects and timeout handlers. I also built out a Pub/Sub system where subscribers receive broadcasted messages in real-time. Managing shared state across all these blocked clients required careful use of mutexes to protect resources and prevent race conditions.

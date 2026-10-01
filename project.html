@@ -23,15 +23,22 @@
 
     <!-- Web Manifest -->
     <link rel="manifest" href="/assets/site.webmanifest">
+    <script>
+        const savedTheme = localStorage.getItem("theme");
+        if (savedTheme === "dark" || savedTheme === null) {
+            document.documentElement.setAttribute("data-theme", "dark");
+            localStorage.setItem("theme", "dark");
+        }
+    </script>
 </head>
 
 <body class="project">
     <header class="site-header">
         <div class="container header-inner">
             <div class="brand">
-                <a href="/" class="back">← Back</a>
-                <h1 id="project-title" class="name">Project</h1>
-                <p id="project-sub" class="tagline"></p>
+                <a href="/" class="back">← All Posts</a>
+    <h1 id="project-title" class="name">Post</h1>
+    <p id="project-sub" class="tagline"></p>
             </div>
             <div class="header-actions">
 
@@ -45,19 +52,7 @@
                     </svg>
                     <span>Open in GitHub</span>
                 </a>
-                <a class="icon-link" href="/resume.pdf" target="_blank" rel="noopener" aria-label="Resume (PDF)">
-                    <svg width="20" height="20" viewBox="0 0 24 24" aria-hidden="true">
-                        <!-- Document with folded corner -->
-                        <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z" fill="none"
-                            stroke="currentColor" stroke-width="1.7" stroke-linejoin="round" />
-                        <path d="M14 2v6h6" fill="none" stroke="currentColor" stroke-width="1.7"
-                            stroke-linejoin="round" />
-                        <!-- “Text lines” -->
-                        <path d="M8 9h5M8 13h8M8 17h8" fill="none" stroke="currentColor" stroke-width="1.7"
-                            stroke-linecap="round" />
-                    </svg>
-                </a>
-
+                
 
                 <a class="icon-link" href="https://github.com/ahmadhrashid" target="_blank" rel="noopener"
                     aria-label="GitHub">
@@ -84,23 +79,26 @@
                     </svg>
                 </a>
 
-                <button id="theme-toggle-2" class="theme-btn" aria-label="Toggle theme">Dark</button>
-
+                <button id="theme-toggle-2" class="theme-btn" aria-label="Toggle theme">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+                    </svg>
+                </button>
             </div>
         </div>
     </header>
 
-    <main class="container project-container">
-        <aside class="toc" id="toc">
-            <h4>Contents</h4>
-            <nav id="toc-list"></nav>
-        </aside>
+<main id="main-container" class="container project-container">
+    <aside class="toc" id="toc">
+        <h4>Contents</h4>
+        <nav id="toc-list"></nav>
+    </aside>
 
-        <article class="doc" id="doc">
-            <div id="doc-meta" class="doc-meta"></div>
-            <div id="markdown-content" class="markdown-content">Loading…</div>
-        </article>
-    </main>
+    <article class="doc" id="doc">
+        <div id="doc-meta" class="doc-meta"></div>
+        <div id="markdown-content" class="markdown-content">Loading…</div>
+    </article>
+</main>
 
     <script src="scripts/projects.js"></script>
     <script src="scripts/project.js"></script>

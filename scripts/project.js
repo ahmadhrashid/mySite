@@ -1,13 +1,10 @@
-// --- DEFAULT THEME: dark ---
-// If the user hasn't chosen a theme yet, default to dark.
-if (!localStorage.getItem("theme")) {
-    localStorage.setItem("theme", "dark");
-    document.documentElement.setAttribute("data-theme", "dark");
-}
-
 document.addEventListener("DOMContentLoaded", () => {
     setupThemeToggle();
-    const id = new URLSearchParams(location.search).get("id");
+    
+    const urlParams = new URLSearchParams(location.search);
+    const id = urlParams.get("id");
+    const view = urlParams.get("view") || "post"; // Defaults to blog post
+
     if (!id) {
         document.getElementById("markdown-content").innerText = "No project specified.";
         return;
@@ -17,29 +14,51 @@ document.addEventListener("DOMContentLoaded", () => {
         document.getElementById("markdown-content").innerText = `Project "${id}" not found.`;
         return;
     }
+
     document.title = `Ahmad Rashid | ${project.title}`;
-
-
-    // fill header meta
     document.getElementById("project-title").innerText = project.title;
     document.getElementById("project-sub").innerText = project.short;
+    
+    // Hide the GitHub header button if there is no repo (e.g., for internships)
     const repoLink = document.getElementById("repo-link");
-    repoLink.href = project.repo;
+    if (project.repo) {
+        repoLink.href = project.repo;
+        repoLink.style.display = "inline-flex";
+    } else {
+        repoLink.style.display = "none";
+    }
 
-    // fetch and render markdown
-    fetch(project.mdPath)
+    // Apply layout based on view type
+    const mainContainer = document.getElementById("main-container");
+    const tocAside = document.getElementById("toc");
+    const targetPath = (view === "doc") ? project.docPath : project.postPath;
+    
+    if (view === "post") {
+        mainContainer.className = "container post-container";
+        tocAside.style.display = "none";
+    } else {
+        mainContainer.className = "container project-container";
+        tocAside.style.display = "block";
+    }
+
+    if (!targetPath) {
+        document.getElementById("markdown-content").innerText = "Document not found.";
+        return;
+    }
+
+    fetch(targetPath)
         .then(r => {
             if (!r.ok) throw new Error("Failed to load markdown");
             return r.text();
         })
-        .then(md => renderMarkdown(md))
+        .then(md => renderMarkdown(md, view))
         .catch(err => {
-            document.getElementById("markdown-content").innerText = `Error loading project doc: ${err.message}`;
+            document.getElementById("markdown-content").innerText = `Error loading file: ${err.message}`;
         });
 });
 
-function renderMarkdown(md) {
-    // Use marked to parse markdown to HTML
+// Update renderMarkdown to accept the view parameter
+function renderMarkdown(md, view) {
     marked.setOptions({
         gfm: true,
         headerIds: true,
@@ -55,21 +74,19 @@ function renderMarkdown(md) {
             }
         }
     });
-
     const html = marked.parse(md);
     const container = document.getElementById("markdown-content");
     container.innerHTML = html;
-
-    // Make sure doc won't force page width to expand
-    // (ensures children can shrink)
+    
     const doc = document.getElementById("doc");
     doc.style.minWidth = "0";
-
-    // Add copy buttons for code blocks
+    
     addCopyButtons(container);
-
-    // Build TOC
-    buildTOC(container);
+    
+    // Only generate the sidebar if the user clicked Docs
+    if (view === "doc") {
+        buildTOC(container);
+    }
 }
 
 function addCopyButtons(container) {
@@ -128,9 +145,6 @@ function setupThemeToggle() {
     const applied = localStorage.getItem("theme");
     if (applied) {
         document.documentElement.setAttribute("data-theme", applied);
-        btn.innerText = applied === "dark" ? "Light" : "Dark";
-    } else {
-        btn.innerText = "Dark";
     }
 
     btn.addEventListener("click", () => {
@@ -139,6 +153,5 @@ function setupThemeToggle() {
         if (next) document.documentElement.setAttribute("data-theme", next);
         else document.documentElement.removeAttribute("data-theme");
         localStorage.setItem("theme", next);
-        btn.innerText = next === "dark" ? "Light" : "Dark";
     });
 }

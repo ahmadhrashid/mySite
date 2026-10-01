@@ -1,0 +1,5 @@
+# Serving the Web: A Multithreaded C HTTP Server
+
+I wrote this minimal HTTP/1.0 server in C to get a better grasp on network programming and concurrency. Instead of just handling a single connection, the server uses a dedicated thread pool and a thread-safe queue to serve static files to multiple clients simultaneously. It automatically maps URL paths to files within a document root and returns their contents alongside the appropriate HTTP headers.
+
+A major focus for this project was making the server highly configurable and observable. I added runtime configuration so you can easily swap the listening port, document root, and thread count using command-line flags or a custom key-value `.conf` file. I also implemented a logging system that records every incoming request, timestamp, client IP, and status code to a dedicated access log, keeping server errors in a separate file for easier debugging.
